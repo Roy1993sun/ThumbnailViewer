@@ -21,9 +21,9 @@ import com.orhanobut.logger.Logger;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final int READ_EXTERNAL_STORAGE_CODE = 0;
-    public static final int MEDIA_STORE_LOADER_ID = 0;
+    public static final int MEDIA_STORE_LOADER_ID      = 0;
 
-    private RecyclerView mThumbnailRecyclerView;
+    private RecyclerView      mThumbnailRecyclerView;
     private MediaStoreAdapter mMediaStoreAdapter;
 
     @Override
@@ -79,13 +79,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {MediaStore.Files.FileColumns._ID,
                                MediaStore.Files.FileColumns.DATE_ADDED,
+                               MediaStore.Files.FileColumns.DATA,
                                MediaStore.Files.FileColumns.MEDIA_TYPE,};
-        String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "="
-                + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE + " OR "
-                + MediaStore.Files.FileColumns.MEDIA_TYPE + "="
-                + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+        String selection = MediaStore.Files.FileColumns.MEDIA_TYPE + "=" + MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE + " OR " + MediaStore.Files.FileColumns.MEDIA_TYPE + "=" + MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
         Logger.d(selection);
-        return new CursorLoader(this,MediaStore.Files.getContentUri("external"),projection,selection,null,MediaStore.Files.FileColumns.DATE_ADDED + " DESC");
+        return new CursorLoader(this, MediaStore.Files.getContentUri("external"), projection,
+                                selection, null, MediaStore.Files.FileColumns.DATE_ADDED + " DESC");
     }
 
     @Override
