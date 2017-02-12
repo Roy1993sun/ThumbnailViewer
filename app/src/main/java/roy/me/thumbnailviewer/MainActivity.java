@@ -1,6 +1,7 @@
 package roy.me.thumbnailviewer;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -101,5 +102,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onClickImage(Uri imageUri) {
         Toast.makeText(this, "image URI = " + imageUri.toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ShowImageActivity.class);
+        intent.setData(imageUri);
+        startActivity(intent);
     }
 }
