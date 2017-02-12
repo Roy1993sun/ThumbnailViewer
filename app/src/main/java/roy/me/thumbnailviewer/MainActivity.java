@@ -3,6 +3,7 @@ package roy.me.thumbnailviewer;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -18,7 +19,7 @@ import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, MediaStoreAdapter.OnClickThumbnailListener {
 
     public static final int READ_EXTERNAL_STORAGE_CODE = 0;
     public static final int MEDIA_STORE_LOADER_ID      = 0;
@@ -95,5 +96,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mMediaStoreAdapter.changeCursor(null);
+    }
+
+    @Override
+    public void onClickImage(Uri imageUri) {
+        Toast.makeText(this, "image URI = " + imageUri.toString(), Toast.LENGTH_SHORT).show();
     }
 }
