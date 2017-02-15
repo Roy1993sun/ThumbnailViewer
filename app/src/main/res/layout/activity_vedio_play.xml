@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_vedio_play"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="roy.me.thumbnailviewer.VideoPlayActivity">
+
+    <SurfaceView
+        android:layout_width="352dp"
+        android:layout_height="417dp"
+        android:id="@+id/surfaceView"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        android:layout_marginTop="8dp"/>
+</android.support.constraint.ConstraintLayout>
