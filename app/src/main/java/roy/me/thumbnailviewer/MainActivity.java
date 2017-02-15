@@ -106,4 +106,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         intent.setData(imageUri);
         startActivity(intent);
     }
+
+    @Override
+    public void onClickVideo(Uri videoUri) {
+        Toast.makeText(this, "image URI = " + videoUri.toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, VideoPlayActivity.class);
+        intent.setData(videoUri);
+        startActivity(intent);
+    }
 }

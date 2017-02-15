@@ -25,6 +25,8 @@ public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.Vi
 
     public interface OnClickThumbnailListener {
         void onClickImage(Uri imageUri);
+
+        void onClickVideo(Uri videoUri);
     }
 
     public MediaStoreAdapter(Activity activity) {
@@ -60,7 +62,7 @@ public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.Vi
                 mMediaStoreCursor.getCount();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final ImageView mImageView;
 
@@ -139,16 +141,20 @@ public class MediaStoreAdapter extends RecyclerView.Adapter<MediaStoreAdapter.Vi
                 MediaStore.Files.FileColumns.MEDIA_TYPE);
         int dataIndex = mMediaStoreCursor.getColumnIndex(MediaStore.Files.FileColumns.DATA);
 
+        // 先拿到所点击的media的position 再进行下面的操作 否则会拿到缓存的错误的内容
         mMediaStoreCursor.moveToPosition(position);
+
+        String dataString = mMediaStoreCursor.getString(dataIndex);
+        Uri mediaUri = Uri.parse("file://" + dataString);
+
         switch (mMediaStoreCursor.getInt(mediaTypeIndex)) {
             case MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE:
-                String dataString = mMediaStoreCursor.getString(dataIndex);
-                Uri imageUri = Uri.parse("file://" + dataString);
-                mOnClickThumbnailListener.onClickImage(imageUri);
+
+                mOnClickThumbnailListener.onClickImage(mediaUri);
                 break;
 
             case MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO:
-
+                mOnClickThumbnailListener.onClickVideo(mediaUri);
                 break;
             default:
                 break;
